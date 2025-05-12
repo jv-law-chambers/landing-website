@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 17% 97%; /* #f8f8f8 - Off-white */
+    --foreground: 0 0% 20%; /* #333333 - Dark gray */
+    --card: 0 0% 100%; /* #ffffff - White */
+    --card-foreground: 0 0% 20%; /* #333333 - Dark gray */
+    --popover: 0 0% 100%; /* #ffffff - White */
+    --popover-foreground: 0 0% 20%; /* #333333 - Dark gray */
+    --primary: 219 44% 19%; /* #1a2a43 - Deep navy blue */
+    --primary-foreground: 0 0% 100%; /* #ffffff - White */
+    --secondary: 0 0% 95%; /* #f2f2f2 - Light gray */
+    --secondary-foreground: 0 0% 20%; /* #333333 - Dark gray */
+    --muted: 0 0% 95%; /* #f2f2f2 - Light gray */
+    --muted-foreground: 0 0% 40%; /* #666666 - Medium gray */
+    --accent: 42 54% 58%; /* #c8a45e - Gold/amber */
+    --accent-foreground: 0 0% 100%; /* #ffffff - White */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 88%; /* #e0e0e0 - Light gray border */
+    --input: 0 0% 88%; /* #e0e0e0 - Light gray input */
+    --ring: 42 54% 58%; /* #c8a45e - Gold/amber */
+    --radius: 0.25rem; /* 4px */
+
+    /* Custom vars */
+    --heading-font: "Playfair Display", serif;
+    --body-font: "Open Sans", sans-serif;
+  }
+
+  .dark {
+    /* Basic dark mode mapping, can be refined */
+    --background: 219 44% 10%; /* Darker Navy */
+    --foreground: 240 17% 97%; /* Off-white */
+    --card: 219 44% 15%; /* Navy slightly lighter */
+    --card-foreground: 240 17% 97%;
+    --popover: 219 44% 10%;
+    --popover-foreground: 240 17% 97%;
+    --primary: 240 17% 97%; /* Off-white */
+    --primary-foreground: 219 44% 10%; /* Darker Navy */
+    --secondary: 219 44% 15%; /* Navy slightly lighter */
+    --secondary-foreground: 240 17% 97%;
+    --muted: 219 44% 15%;
+    --muted-foreground: 0 0% 60%; /* Lighter gray */
+    --accent: 42 54% 58%; /* Gold/amber */
+    --accent-foreground: 0 0% 10%; /* Dark text on gold */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 219 44% 25%; /* Lighter Navy border */
+    --input: 219 44% 25%;
+    --ring: 42 54% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--body-font);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 700; /* Bold */
+  }
+  /* Specific heading sizes */
+  h1 { @apply text-4xl md:text-5xl; } /* ~48px */
+  h2 { @apply text-3xl md:text-4xl; } /* ~36px */
+  h3 { @apply text-2xl md:text-3xl; } /* ~28px */
+  h4 { @apply text-xl md:text-2xl; } /* ~24px */
+  h5 { @apply text-lg md:text-xl font-semibold; } /* Semi-bold subheadings */
+  h6 { @apply text-base md:text-lg font-semibold; }
+
+  /* Shadcn button override for gold CTA */
+  .btn-cta {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 uppercase text-base tracking-[1px] px-6 py-3 rounded;
+  }
+  .btn-cta:hover {
+    background-color: hsl(42 48% 50%); /* Slightly darker gold #b69351 */
+  }
+
+  /* Section padding defaults */
+  .section-padding {
+    @apply py-16 md:py-24; /* 64px mobile, 96px desktop approx */
+  }
+
+  .section-padding-sm {
+    @apply py-12 md:py-20; /* 48px mobile, 80px desktop approx */
+  }
+
+  /* Max width container */
+  .container-max {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
