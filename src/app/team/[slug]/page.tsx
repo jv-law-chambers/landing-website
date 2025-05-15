@@ -81,7 +81,7 @@ export default async function TeamMemberProfilePage({ params }: { params: { slug
                    alt={`Professional photo of ${member.name}`}
                    data-ai-hint={`${member.name.split(' ')[0]} ${member.name.split(' ')[1] || ''}`}
                    fill
-                   style={{ objectFit: 'cover' }}
+                   style={{ objectFit: 'cover', objectPosition: '25% center' }}
                    sizes="(max-width: 768px) 224px, 33vw"
                    priority // Prioritize loading the main image
                  />

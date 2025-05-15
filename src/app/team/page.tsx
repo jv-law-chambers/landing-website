@@ -121,7 +121,7 @@ export default function TeamPage() {
                        alt={`Professional photo of ${member.name}`}
                        data-ai-hint={`${member.name.split(' ')[0]} ${member.name.split(' ')[1] || ''}`}
                        fill
-                       style={{ objectFit: 'cover' }}
+                       style={{ objectFit: 'cover', objectPosition: '25% center' }}
                        sizes="192px" // ~ 48 * 4
                        className="transition-transform duration-300 group-hover:scale-105"
                        priority={index < 3} // Prioritize loading images for the first few members

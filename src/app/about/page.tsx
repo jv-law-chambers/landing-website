@@ -93,7 +93,7 @@ export default function AboutPage() {
                 <Card className="text-center shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border-none bg-transparent h-full flex flex-col"> {/* Remove card border/bg, make flex col */}
                    {/* Make image container circular */}
                   <div className="relative aspect-square w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden shadow-md border-2 border-secondary group-hover:border-accent/30 transition-colors">
-                     <Image src={member.image} alt={member.name} fill style={{ objectFit: 'cover' }} sizes="160px" />
+                     <Image src={member.image} alt={member.name} fill style={{ objectFit: 'cover', objectPosition: '25% center' }} sizes="160px" />
                   </div>
                   <CardContent className="p-2 flex-grow flex flex-col justify-center"> {/* Adjusted padding, flex grow */}
                     <h5 className="font-heading text-lg font-semibold group-hover:text-primary transition-colors">{member.name}</h5>
