@@ -2,20 +2,21 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SectionHeading } from '@/components/section-heading';
-import { ArrowRight, Briefcase, Landmark, Scale, CheckSquare, FileText, UserCheck, Building } from 'lucide-react'; // Use consistent icons
+import { ArrowRight, Briefcase, Landmark, Scale, Columns4Icon, MapPinHouseIcon, User, UserCheck, Building, Users , Handshake, YoutubeIcon, Brain} from 'lucide-react'; // Use consistent icons
 // import { Breadcrumbs } from '@/components/layout/breadcrumbs';
 
 
 // Use a consistent set or map icons properly
 const practiceAreaDetails = [
+  { name: "Business Law", icon: Handshake, description: "Comprehensive legal support for businesses across all stages and sectors.", href: "/practice-areas/business-law"},
   { name: "Corporate & Commercial Law", icon: Briefcase, description: "Providing end-to-end legal support, from formation to dispute resolution.", href: "/practice-areas/corporate-law" }, // Updated Name/Desc
-  { name: "Commercial Litigation", icon: Scale, description: "Representing clients in complex business disputes, arbitration, and mediation.", href: "/practice-areas/commercial-litigation" },
-  { name: "Intellectual Property", icon: Landmark, description: "Protecting trademarks, copyrights, patents, designs, and trade secrets.", href: "/practice-areas/intellectual-property" },
-  { name: "Real Estate Law", icon: Building, description: "Handling property transactions, leasing, zoning, and development projects.", href: "/practice-areas/real-estate-law" }, // Changed Icon
   { name: "Employment Law", icon: UserCheck, description: "Advising on labor regulations, contracts, policies, and workplace disputes.", href: "/practice-areas/employment-law" }, // Changed Icon
-  { name: "Regulatory Compliance", icon: CheckSquare, description: "Navigating complex regulatory landscapes across various Indian industries.", href: "/practice-areas/regulatory-compliance" }, // Updated Desc
-  { name: "Tax Law", icon: FileText, description: "Providing strategic advice on direct and indirect taxation matters.", href: "/practice-areas/tax-law" }, // Example additional area
-  { name: "Insolvency & Bankruptcy", icon: Briefcase, description: "Assisting creditors and debtors through insolvency proceedings under IBC.", href: "/practice-areas/insolvency-bankruptcy" }, // Example additional area, Updated Desc
+  { name: "Real Estate Law", icon: Building, description: "Handling property transactions, leasing, zoning, and development projects.", href: "/practice-areas/real-estate-law" }, // Changed Icon
+  { name: "RERA-Specific Services", icon: MapPinHouseIcon, description: "Representing clients in complex business disputes, arbitration, and mediation.", href: "/practice-areas/rera-specific-services" },
+  { name: "Intellectual Property", icon: Brain, description: "Protecting trademarks, copyrights, patents, designs, and trade secrets.", href: "/practice-areas/intellectual-property" },
+  { name: "YouTube Takedown Services", icon: YoutubeIcon, description: "Navigating complex regulatory landscapes across various Indian industries.", href: "/practice-areas/youtube-takedown-services" }, // Updated Desc
+  { name: "Personal Law", icon: User, description: "Providing strategic advice on direct and indirect taxation matters.", href: "/practice-areas/personal-law" }, // Example additional area
+  { name: "Criminal Law", icon: Columns4Icon, description: "Assisting creditors and debtors through insolvency proceedings under IBC.", href: "/practice-areas/criminal-law-services" }, // Example additional area, Updated Desc
   // Add more practice areas if needed, ensuring icons are imported and assigned.
 ];
 

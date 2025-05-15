@@ -94,7 +94,12 @@ export function Header() {
           {/* Mobile Menu Trigger */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+             <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setIsOpen(!isOpen)}
+              >
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 <span className="sr-only">Toggle Menu</span>
               </Button>
@@ -109,10 +114,6 @@ export function Header() {
                 <SheetDescription className="text-sm text-muted-foreground px-4">
                 </SheetDescription>
 
-                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
-                  <X className="h-6 w-6" />
-                  <span className="sr-only">Close Menu</span>
-                </Button>
               </div>
               {/* Mobile Menu Links */}
               <nav className="flex-grow p-4 space-y-1 overflow-y-auto">

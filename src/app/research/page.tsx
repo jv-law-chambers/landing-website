@@ -7,32 +7,32 @@ import { Target, Microscope, BrainCircuit, Users, GraduationCap, Building, Scale
 // import { Breadcrumbs } from '@/components/layout/breadcrumbs';
 
 const coreMission = [
-  { icon: Target, title: "Deep Legal Understanding", text: "To delve into the nuances of Indian law, providing clarity on complex legal principles and their practical applications in the contemporary legal and business environment." },
-  { icon: Microscope, title: "Practical Application", text: "To bridge the gap between theoretical legal knowledge and its real-world implementation, offering actionable insights relevant to legal practice and business decisions in India." },
-  { icon: BrainCircuit, title: "Anticipating Trends", text: "To identify emerging legal trends, legislative changes, and judicial pronouncements in India, equipping stakeholders with foresight for future legal landscapes." },
-  { icon: Users, title: "Fostering Dialogue", text: "To stimulate informed discussion and debate within the Indian legal community, contributing to the evolution of legal thought and the development of jurisprudence." },
+  { icon: Target, title: "Deep Dive Analysis", text: "Meticulously examining the full spectrum of Supreme Court judgments, uncovering hidden connections, evolving legal principles, and nuanced interpretations." },
+  { icon: Microscope, title: "Practical Application", text: "Providing actionable insights, empowering our users to develop more effective legal strategies and policies grounded in a thorough understanding of precedent." },
+  { icon: BrainCircuit, title: "Efficient Resource Utilization", text: "Streamlining the research process, enabling our users to leverage comprehensive insights while maximizing their time and resources." },
+  { icon: Users, title: "Evidence-Based Knowledge", text: "Transforming complex legal data into clear and accessible intelligence, allowing for more informed decisions and robust argumentation." },
 ];
 
 const methodologyPoints = [
- { icon: CheckSquare, title: "Rigorous Legal Analysis", text: "Employing meticulous examination of Indian statutes, landmark case law, legislative history, and regulatory frameworks." },
- { icon: Database, title: "Comprehensive Data Synthesis", text: "Integrating diverse data sources, including judicial pronouncements from various Indian courts, legislative materials, government reports, and academic literature." },
- { icon: Search, title: "Comparative Jurisprudence", text: "Drawing relevant insights from international legal systems and best practices to enrich the understanding and application of Indian law, where appropriate." },
- { icon: Lightbulb, title: "Expert Collaboration", text: "Engaging with subject-matter experts, senior advocates, and industry practitioners across India to ensure practical relevance and contemporary insights." },
- { icon: Briefcase, title: "Technology Integration", text: "Utilizing advanced legal research databases, AI-powered analytical tools, and legal tech platforms for efficiency, depth, and comprehensive analysis." },
+ { icon: CheckSquare, title: "Interpret with Context", text: "Move beyond surface-level readings to grasp the subtle nuances, contextual implications, and evolving interpretations of legal language in judgments." },
+ { icon: Database, title: "Identify Interconnectedness", text: "Reveal the intricate relationships between cases, tracing the development of legal doctrines and the interconnectedness of the judicial system." },
+ { icon: Search, title: "Provide Holistic Perspectives", text: "Explore majority opinions, dissenting views, and supporting arguments, providing a complete and nuanced perspective on each judgment." },
+ { icon: Lightbulb, title: "Spot Emerging Trends", text: " Detect recurring patterns and evolving legal landscapes, providing insights into potential future developments and shifts in judicial thinking." },
+ { icon: Briefcase, title: "Present Information Clearly", text: "Organize our findings in easily understandable formats, enabling users to readily utilize research findings for practical purposes." },
 ];
 
 const expertisePoints = [
-  { icon: Scale, title: "Seasoned Legal Professionals", text: "Our core research team comprises experienced lawyers with deep domain knowledge across various facets of Indian law." },
-  { icon: GraduationCap, title: "Academic Rigor", text: "We collaborate with leading legal academics and research institutions in India for theoretical depth and scholarly perspectives." },
-  { icon: Building, title: "Industry Insights", text: "Input from industry specialists and business leaders ensures the practical applicability and commercial relevance of our research." },
-  { icon: BookOpen, title: "Dedicated Research Team", text: "A specialized team focuses solely on legal research, analysis, and the creation of insightful content, ensuring quality and focus." },
+  { icon: Scale, title: "Ensure Legal Accuracy", text: "Our experienced legal researchers ensure the accuracy, relevance, and practical applicability of our findings." },
+  { icon: GraduationCap, title: "Continuously Enhance Our Capabilities", text: "We are committed to refining our methodologies and adapting to the constantly evolving landscape of legal research and technology." },
+  { icon: Building, title: "Uphold Ethical Practices", text: "We are dedicated to transparent and responsible research practices, guided by the highest ethical standards." },
+  { icon: BookOpen, title: "Foster Knowledge Sharing", text: "We believe in the power of collaboration and contribute to the growth and innovation of the legal profession." },
 ];
 
 const beneficiaries = [
- { icon: Briefcase, title: "Legal Practitioners", description: "Enhancing case strategies, legal arguments, and client advisory with in-depth analysis and current legal intelligence specific to India." },
- { icon: GraduationCap, title: "Legal Academics", description: "Providing rich material for research, teaching, and scholarly debate on contemporary issues in Indian law." },
- { icon: Building, title: "Corporations & Businesses", description: "Informing compliance strategies, risk management frameworks, and strategic decision-making within the Indian regulatory environment." },
- { icon: Users, title: "Policymakers & Regulators", description: "Contributing data-driven insights and analysis for legislative drafting, policy formulation, and regulatory development in India." },
+ { icon: Briefcase, title: "Legal Practitioners", description: "Offering a powerful resource to enhance case preparation and develop well-supported legal arguments." },
+ { icon: GraduationCap, title: "Legal Academics", description: "Supporting in-depth scholarship, identifying research gaps, and fostering a more nuanced understanding of the law." },
+ { icon: Building, title: "Policymakers", description: "Providing an evidence-based foundation for sound legislative and policy decisions." },
+ { icon: Users, title: "Legal Students", description: "Enriching their understanding of the legal system by providing exposure to innovative analytical methods and a deeper comprehension of legal reasoning." },
 ];
 
 export default function ResearchPage() {
@@ -58,7 +58,7 @@ export default function ResearchPage() {
           <SectionHeading title="Elevating Legal Research with Expert-Driven Insights" />
           <div className="prose prose-lg max-w-4xl mx-auto text-foreground/90">
             <p>
-              At the Law Chambers of G.R. Hari, we recognize that robust legal practice is built upon a foundation of thorough and insightful research. Our dedicated research division, accessible at <Link href="https://research.grhari.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent font-semibold">research.grhari.com</Link>, embodies our commitment to advancing the understanding and application of Indian law. We delve into complex legal issues, analyze emerging trends, scrutinize judicial pronouncements, and dissect legislative developments to provide valuable resources for legal professionals, academics, businesses, and policymakers across India.
+              At the Law Chambers of G.R. Hari, our dedicated Research Wing is committed to advancing the understanding of Indian law. We specialize in in-depth analysis of Supreme Court of India judgments, combining the power of technology with the profound skills of experienced legal researchers. Our goal is to provide transformative insights that empower legal professionals, academics, and policymakers alike.
             </p>
              <div className="text-center mt-8">
                 <Link href="https://research.grhari.com" target="_blank" rel="noopener noreferrer" passHref>
@@ -75,6 +75,9 @@ export default function ResearchPage() {
       <section className="section-padding-sm bg-secondary">
         <div className="container-max">
           <SectionHeading title="Our Core Mission" centered/>
+           <p className="text-center text-lg text-muted-foreground mb-10">
+             We strive to provide legal research of the highest caliber, moving beyond the limitations of traditional methods. Our mission is defined by
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {coreMission.map((item, index) => (
               <Card key={index} className="bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow duration-300">
@@ -96,7 +99,7 @@ export default function ResearchPage() {
         <div className="container-max max-w-4xl mx-auto">
           <SectionHeading title="Our Methodology: The Synergy of Expertise and Technology" centered />
           <p className="text-center text-lg text-muted-foreground mb-10">
-             Our research methodology is meticulously designed to deliver comprehensive, reliable, and contextually relevant insights into Indian law. We combine traditional legal scholarship with modern analytical tools and collaborative expertise.
+             Our methodology is built on a foundation of rigorous legal analysis, enhanced by cutting-edge technology. We leverage artificial intelligence as a powerful tool that amplifies the skills of our researchers, enabling them to:
           </p>
           <Accordion type="single" collapsible className="w-full">
             {methodologyPoints.map((point, index) => (
@@ -119,7 +122,10 @@ export default function ResearchPage() {
        {/* Expertise Section */}
       <section className="section-padding-sm bg-primary text-primary-foreground">
         <div className="container-max">
-          <SectionHeading title="The Expertise Behind the Innovation" centered className="text-white"/>
+          <SectionHeading title="The Expertise Behind the Innovation" centered accentColor='text-accent' className="text-white"/>
+          <p className="text-center text-lg text-muted-foreground text-white mb-10">
+             Our research team is composed of seasoned legal professionals, data analysts, and technology experts who bring their diverse backgrounds to our collaborative research process. This team approach allows us to
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {expertisePoints.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
@@ -164,7 +170,7 @@ export default function ResearchPage() {
         <div className="container-max text-center max-w-3xl mx-auto">
            <SectionHeading title="Join Our Pursuit of Deep Legal Understanding" centered />
            <p className="text-lg text-muted-foreground mb-8">
-              Explore our dedicated research platform to access publications, articles, and analyses on critical aspects of Indian law. Engage with our findings, share your perspectives, and contribute to the ongoing dialogue shaping the future of law in India. For specific research inquiries or collaboration proposals, please do not hesitate to reach out.
+              We invite you to explore our research, engage with our insights, and join us in our mission to elevate legal understanding through expert-driven analysis.
            </p>
            <div className="space-x-4">
               <Link href="https://research.grhari.com" target="_blank" rel="noopener noreferrer" passHref>

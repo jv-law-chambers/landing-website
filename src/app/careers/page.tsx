@@ -17,6 +17,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 // import { Breadcrumbs } from '@/components/layout/breadcrumbs';
 import { Award, BookOpen, Users, TrendingUp, Handshake, Sparkles, Upload } from 'lucide-react'; // Example Icons
+import { sendApplicationEmail } from '@/actions/send-application-email';
 
 const benefits = [
  { icon: Award, title: "Meaningful Work", text: "Engage in challenging and impactful legal matters within the Indian context." },
@@ -26,18 +27,83 @@ const benefits = [
 ];
 
 const whyJoinUsPoints = [
- { icon: Sparkles, title: "Intellectually Stimulating Cases", text: "Tackle complex legal issues across diverse sectors in India." },
- { icon: Handshake, title: "Client Impact", text: "Directly contribute to achieving positive outcomes for our varied clientele." },
- { icon: Users, title: "Supportive & Respectful Team", text: "Be part of a collegial atmosphere that values teamwork, respect, and diverse perspectives." },
- { icon: Award, title: "Professional Reputation", text: "Join a firm recognized for its integrity, ethical standards, and legal excellence in India." },
+ { icon: Sparkles, title: "Growth Mindset", text: "Opportunities for accelerated learning and mentorship abound." },
+ { icon: Handshake, title: "Diverse Caseload", text: "Experience the thrill of working on a broad range of legal issues." },
+ { icon: Users, title: "Inspiring Colleagues", text: "Collaborate with a team of bright, committed legal professionals." },
+ { icon: Award, title: "Honors Your Talent", text: "We reward hard work and exceptional results." },
 ];
 
 // **Note:** Replace with actual current openings
 const currentOpenings = [
- { title: "Associate - Corporate Law (2-4 Years PQE)", location: "Chennai", responsibilities: ["Drafting and reviewing commercial agreements", "Assisting in M&A transactions", "Conducting legal due diligence", "Corporate compliance management"], requirements: ["LLB degree from a recognized Indian university", "Enrolled with a State Bar Council", "2-4 years post-qualification experience in corporate/commercial law", "Strong analytical and drafting skills"] },
- { title: "Paralegal - Litigation Support", location: "Chennai", responsibilities: ["Case file management", "Legal research using databases like Manupatra/SCC Online", "Drafting basic legal documents", "Coordinating with court clerks and counsels"], requirements: ["Bachelor's degree (Law degree preferred but not mandatory)", "1+ year experience as a paralegal in a law firm", "Excellent organizational skills and proficiency in MS Office"] },
- // Add more openings as needed
+  {
+    title: "Senior Associate (Litigation)",
+    location: "Chennai",
+    responsibilities: [
+      "Lead And Manage Complex Litigation Cases",
+      "Conduct Legal Research And Analysis",
+      "Draft Pleadings And Motions",
+      "Represent Clients In Court",
+      "Mentor Junior Associates",
+      "Develop Strong Client Relationships"
+    ],
+    requirements: [
+      "5+ Years Of Litigation Experience",
+      "Strong Analytical And Research Skills",
+      "Excellent Written And Oral Communication Skills",
+      "Proven Ability To Manage Cases Independently",
+      "A Passion For Advocacy"
+    ]
+  },
+  {
+    title: "Associate (Litigation)",
+    location: "Chennai",
+    responsibilities: [
+      "Conduct Legal Research", 
+      "Draft Pleadings And Motions", 
+      "Assist Senior Associates In Case Preparation", 
+      "Represent Clients In Court", 
+      "Develop Strong Legal Skills."
+    ],
+    requirements: [
+      "2+ Years Of Litigation Experience", 
+      "Strong Analytical And Research Skills", 
+      "Excellent Written And Oral Communication Skills",
+      "A Commitment To Excellence."
+    ]
+  },
+  {
+    title: "Associate (Real Estate) – Tamil Must",
+    location: "Chennai",
+    responsibilities: [
+      "Conduct Legal Research On Real Estate Matters", 
+      "Draft Legal Documents Related To Property Transactions", 
+      "Assist Senior Associates In Real Estate Litigation", 
+      "Provide Legal Advice To Clients On Real Estate Issues."
+    ],
+    requirements: [
+      "2+ Years Of Experience In Real Estate Law", 
+      "Strong Knowledge Of Tamil Nadu Land Laws",
+      "Excellent Research And Drafting Skills",
+      "Fluency In Tamil."
+    ]
+  },
+  {
+    title: "Intern",
+    location: "Chennai",
+    responsibilities: [
+      "Assist Associates With Research", 
+      "Legal Writing And Document Preparation",
+      "Participate In Client Meetings", 
+      "Gain Practical Legal Experience."
+    ],
+    requirements: [
+      "Currently Enrolled In A Recognized Law Program", 
+      "Strong Research And Writing Abilities",
+      "A Keen Interest In The Legal Field."
+    ]
+  }
 ];
+
 
 // --- Form Schema and Handling ---
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -62,7 +128,6 @@ const applicationFormSchema = z.object({
 type ApplicationFormValues = z.infer<typeof applicationFormSchema>;
 
 // --- Component ---
-
 export default function CareersPage() {
    const { toast } = useToast();
    const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -96,51 +161,41 @@ export default function CareersPage() {
      setIsSubmitting(true);
      console.log("Form Data to be submitted:", data); // Log data for debugging
 
-     // **Backend Integration Needed**
-     // Here you would typically:
-     // 1. Create FormData
-     // 2. Append all form fields to FormData
-     // 3. Send FormData to your backend API endpoint (e.g., using fetch or axios)
-     // 4. Handle the response (success/error) from the backend
-
-     // Example using FormData (replace with your actual API endpoint and logic)
-     const formData = new FormData();
-     formData.append('fullName', data.fullName);
-     formData.append('email', data.email);
-     if (data.phone) formData.append('phone', data.phone);
-     formData.append('position', data.position);
-     if (data.coverLetter) formData.append('coverLetter', data.coverLetter);
-     formData.append('resume', data.resume[0]); // Append the file
-     formData.append('consent', data.consent.toString());
-
      try {
-        // Replace '/api/apply' with your actual backend endpoint
-       // const response = await fetch('/api/apply', {
-       //    method: 'POST',
-       //    body: formData,
-       //    // Headers might be needed depending on your backend (e.g., 'Content-Type': 'multipart/form-data' is usually handled by browser with FormData)
-       // });
-
-       // if (!response.ok) {
-       //    const errorData = await response.json().catch(() => ({ message: 'Submission failed with status ' + response.status }));
-       //    throw new Error(errorData.message || 'Application submission failed.');
-       // }
-
-       // Simulate successful submission for now
-       await new Promise(resolve => setTimeout(resolve, 1500));
-       console.log("Simulated successful submission.");
-
-
-       toast({ title: "Application Submitted Successfully!", description: "Thank you for your interest. We will review your application and be in touch if your profile matches our requirements." });
-       form.reset(); // Reset form on success
-       setResumeFileName(null); // Clear file name display
-
+       // Convert resume file to an appropriate format for the server action
+       const formData = new FormData();
+    
+        // Add all form fields
+        formData.append('fullName', data.fullName);
+        formData.append('email', data.email);
+        if (data.phone) formData.append('phone', data.phone);
+        formData.append('position', data.position);
+        if (data.coverLetter) formData.append('coverLetter', data.coverLetter);
+        formData.append('consent', data.consent.toString());
+        
+        // Add the file directly
+        if (data.resume?.[0]) {
+          formData.append('resumeFile', data.resume[0]);
+        }
+        
+    // Call server action with FormData
+    const result = await sendApplicationEmail(formData);
+       if (result.success) {
+         toast({ 
+           title: "Application Submitted Successfully!", 
+           description: "Thank you for your interest. We will review your application and be in touch if your profile matches our requirements." 
+         });
+         form.reset(); // Reset form on success
+         setResumeFileName(null); // Clear file name display
+       } else {
+         throw new Error(result.error || "Application submission failed.");
+       }
      } catch (error) {
-        console.error("Submission Error:", error);
-        const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred. Please try again.";
-        toast({ title: "Submission Failed", description: errorMessage, variant: "destructive" });
+       console.error("Submission Error:", error);
+       const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred. Please try again.";
+       toast({ title: "Submission Failed", description: errorMessage, variant: "destructive" });
      } finally {
-        setIsSubmitting(false);
+       setIsSubmitting(false);
      }
    }
 
@@ -166,7 +221,7 @@ export default function CareersPage() {
         <div className="container-max max-w-4xl mx-auto text-center">
            <SectionHeading title="Unleash Your Legal Potential. Join Our Team." centered />
            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              At the Law Chambers of G.R. Hari, we are constantly seeking talented, dedicated, and passionate legal professionals eager to build a rewarding career in Indian law. We offer a dynamic, challenging, and supportive environment where you can hone your skills, work on complex and significant cases, and contribute to a legacy of legal excellence and client service in India. We value intellectual curiosity, ethical practice, and a commitment to professional growth.
+              At the Law Chambers of G.R. Hari, we believe brilliance emerges from collaboration, passionate advocacy, and the relentless pursuit of growth. We're not just practicing law; we're building careers and shaping the future of the legal profession in India. If you're ready to take your legal career to the next level, we invite you to explore opportunities where you'll make an impact within a dynamic, supportive, and intellectually stimulating environment.
            </p>
             {/* Styled quote or testimonial */}
             <blockquote className="border-l-4 border-accent pl-6 py-2 italic text-foreground/80 my-8 text-left max-w-2xl mx-auto">
@@ -181,10 +236,22 @@ export default function CareersPage() {
           <div>
             <SectionHeading title="Our Commitment to Our Team" />
             <p className="text-muted-foreground leading-relaxed">
-               We believe our people are our greatest asset. Our commitment is to foster a workplace culture that prioritizes professional development, encourages collaboration, ensures mutual respect, and supports the overall well-being of every team member. We provide the resources, mentorship, and opportunities necessary for individuals to thrive both personally and professionally while contributing meaningfully to the firm's success and upholding our standards of excellence in the Indian legal community.
+               We understand that our firm's success is directly linked to the talent and dedication of our team members. That's why we are committed to fostering a workplace where you can thrive both professionally and personally.
             </p>
              <p className="text-muted-foreground leading-relaxed mt-4">
-               This includes structured mentorship programs, access to continuous legal education (CLE) resources relevant to Indian law, opportunities to work across diverse practice areas, and a clear performance evaluation process designed for growth.
+               Meaningful and Challenging Work: Tackle complex legal issues and contribute to high-stakes cases that have a real impact on our clients' lives.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              Continuous Learning and Development: We invest in your growth with mentorship programs, professional development opportunities, and access to cutting-edge legal resources.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              A Collaborative and Supportive Culture: Join a team of bright, passionate, and supportive legal professionals who are committed to excellence and mutual success.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              A Focus on Work-Life Integration: We believe in creating a sustainable work environment that allows you to balance your professional aspirations with your personal life.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mt-4">
+              Competitive Compensation and Benefits: We offer a comprehensive compensation package that recognizes your contributions and includes health insurance, retirement benefits, paid time off, and more.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -209,10 +276,11 @@ export default function CareersPage() {
               <Accordion type="single" collapsible className="w-full">
                {currentOpenings.map((opening, index) => (
                  <AccordionItem key={index} value={`item-${index}`} className="border rounded-lg mb-4 shadow-sm overflow-hidden bg-white">
-                   <AccordionTrigger className="text-lg font-semibold px-6 py-4 hover:no-underline hover:bg-secondary transition-colors flex justify-between items-center text-left">
-                     <span>{opening.title}</span>
-                     <span className="text-sm text-muted-foreground font-normal ml-4 flex-shrink-0">{opening.location}</span>
-                   </AccordionTrigger>
+                   <AccordionTrigger className="text-lg font-semibold px-6 py-4 hover:no-underline hover:bg-secondary transition-colors flex items-center text-left gap-4">
+                    <div className="flex-1 truncate">{opening.title}</div>
+                    <div className="text-sm text-muted-foreground font-normal whitespace-nowrap">{opening.location}</div>
+                  </AccordionTrigger>
+
                    <AccordionContent className="text-base px-6 pb-6 pt-2">
                      <div className="space-y-4">
                         <div>
@@ -251,7 +319,7 @@ export default function CareersPage() {
        {/* Why Join Us Section */}
        <section className="section-padding-sm bg-primary text-primary-foreground">
          <div className="container-max text-center">
-           <SectionHeading title="Why Join Us?" centered className="text-white" />
+           <SectionHeading title="Why Join Us?" centered accentColor='text-accent' className="text-white" />
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
              {whyJoinUsPoints.map((point, index) => (
                <div key={index} className="flex flex-col items-center">
@@ -263,7 +331,7 @@ export default function CareersPage() {
            </div>
             {/* Styled quote or testimonial */}
             <blockquote className="border-l-4 border-accent pl-6 py-2 italic text-primary-foreground/80 my-8 max-w-2xl mx-auto text-left">
-              "The firm truly invests in its people. The opportunities for learning and handling significant responsibilities within the Indian legal system have been unparalleled." - Associate
+              Ready to Elevate Your Career? We're not just looking for resumes— we want to hear your story.
             </blockquote>
          </div>
        </section>
@@ -273,7 +341,7 @@ export default function CareersPage() {
          <div className="container-max max-w-3xl mx-auto text-center">
            <h3 className="font-semibold text-lg mb-2">We Are an Equal Opportunity Employer</h3>
            <p className="text-sm text-muted-foreground">
-             The Law Chambers of G.R. Hari is committed to creating a diverse, inclusive, and respectful workplace. All qualified applicants will receive consideration for employment without regard to race, color, religion, gender, gender identity or expression, sexual orientation, national origin, genetics, disability, age, or veteran status, in accordance with applicable Indian laws. We believe diversity enriches our perspective and enhances our ability to serve our clients effectively.
+             The Law Chambers of G.R. Hari is committed to fostering a diverse and inclusive workplace. We value the unique perspectives and talents of all individuals. All qualified applicants are considered for employment regardless of race, color, religion, sex, sexual orientation, gender identity, age, national origin, disability, or any other protected status.
            </p>
          </div>
        </section>

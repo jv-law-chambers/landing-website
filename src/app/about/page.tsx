@@ -37,7 +37,7 @@ export default function AboutPage() {
           <div>
             <SectionHeading title="Our Mission" />
             <p className="text-lg md:text-xl text-foreground leading-relaxed font-medium">
-              To provide exceptional, ethical, and client-focused legal services that address the complexities of the Indian legal landscape, ensuring justice, fostering trust, and achieving optimal outcomes through expertise, integrity, and innovation.
+              Our mission is to empower you, our client, to confidently navigate the complexities of the Indian legal system. We are dedicated to upholding the highest standards of legal excellence to ensure justice and fairness in every case we handle. We strive to provide pragmatic legal solutions that protect your rights and interests, allowing you to achieve your goals with clarity and peace of mind. We are committed to being your trusted advocate and partner, providing unwavering support and guidance every step of the way.
             </p>
           </div>
           <div>

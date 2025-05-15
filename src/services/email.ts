@@ -1,3 +1,15 @@
+import nodemailer from "nodemailer"
+
+
+/**
+ * Represent an email attachment
+ */
+export interface EmailAttachment {
+  filename: string;
+  path?: string;        // for file paths
+  content?: any;        // for direct content ( Buffer , string , etc. )
+  contentType?: string;
+}
 /**
  * Represents the structure of an email message.
  */
@@ -18,6 +30,7 @@ export interface Email {
    * The HTML content of the email.
    */
   html: string;
+  attachments?: EmailAttachment[];  // Optional Attachments
 }
 
 /**
@@ -27,7 +40,23 @@ export interface Email {
  * @returns A promise that resolves when the email is sent successfully.
  */
 export async function sendEmail(email: Email): Promise<void> {
-  // TODO: Implement this by calling an email sending API.
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com", // e.g., smtp.gmail.com
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: process.env.ADMIN_EMAIL_ADDRESS,
+      pass: process.env.MAIL_APP_PASSWORD,
+    },
+  });
+
+  await transporter.sendMail({
+    from: email.from,
+    to: email.to,
+    subject: email.subject,
+    html: email.html,
+    attachments: email.attachments,
+  });
 
   console.log("Email sent:", email);
 }

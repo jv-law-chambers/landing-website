@@ -1,4 +1,3 @@
-
 "use client"; // Needed for form handling
 
 import * as React from 'react';
@@ -13,8 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-// import { Breadcrumbs } from '@/components/layout/breadcrumbs';
-import { Mail, MapPin, Phone, Clock, ShieldCheck } from 'lucide-react'; // Example Icons, Added ShieldCheck for CAPTCHA
+import { Mail, MapPin, Phone, Clock } from 'lucide-react';
 import { sendContactEmail } from '@/actions/send-contact-email'; // Import the Server Action
 
 // --- Form Schema ---
@@ -23,9 +21,7 @@ const contactFormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }).max(100, { message: "Email cannot exceed 100 characters."}),
   phone: z.string().optional().refine(val => !val || /^[+]?[0-9\s\-()]{7,20}$/.test(val), { message: "Please enter a valid phone number." }), // Basic phone validation
   subject: z.string().min(1, { message: "Please select a subject." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message cannot exceed 5000 characters."}),
-  // Add captcha validation
-  captchaToken: z.string().min(1, { message: "Please complete the CAPTCHA verification." })
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message cannot exceed 5000 characters."})
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -35,10 +31,6 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 export default function ContactPage() {
    const { toast } = useToast();
    const [isSubmitting, setIsSubmitting] = React.useState(false);
-   // Add state for CAPTCHA token (assuming a library like react-google-recaptcha is used)
-   const [captchaToken, setCaptchaToken] = React.useState<string | null>(null);
-   // Ref for CAPTCHA component (e.g., reCAPTCHA)
-   const recaptchaRef = React.useRef<any>(null); // Use appropriate type if using a specific library
 
    const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -48,41 +40,14 @@ export default function ContactPage() {
       phone: "",
       subject: "",
       message: "",
-      captchaToken: "", // Initialize captchaToken
     },
    });
 
-    // Update form value when captchaToken changes
-    React.useEffect(() => {
-        if (captchaToken) {
-            form.setValue('captchaToken', captchaToken, { shouldValidate: true });
-        }
-    }, [captchaToken, form]);
-
-
    async function onSubmit(data: ContactFormValues) {
      setIsSubmitting(true);
-     // Ensure captcha token is included in the data sent to the server action
-     const submissionData = { ...data, captchaToken: data.captchaToken || captchaToken }; // Prioritize form value if set directly
-     console.log("Contact Form Data:", submissionData);
-
-     // Check if captcha token exists client-side (basic check)
-     if (!submissionData.captchaToken) {
-         toast({
-             title: "CAPTCHA Required",
-             description: "Please complete the security check before submitting.",
-             variant: "destructive",
-         });
-         setIsSubmitting(false);
-         return; // Prevent submission
-     }
-
 
      try {
-       // **Backend Integration Point**
-       // Server action `sendContactEmail` will handle server-side validation including CAPTCHA
-
-       const result = await sendContactEmail(submissionData); // Call the Server Action with CAPTCHA token
+       const result = await sendContactEmail(data);
 
         if (result.success) {
            toast({
@@ -90,23 +55,8 @@ export default function ContactPage() {
              description: "Thank you for contacting us. We have received your message and will respond as soon as possible, typically within 1-2 business days.",
            });
            form.reset(); // Reset form on success
-           // Reset CAPTCHA
-           recaptchaRef.current?.reset();
-           setCaptchaToken(null);
         } else {
-            // Handle specific CAPTCHA error from server
-            if (result.error?.toLowerCase().includes('captcha')) {
-                 toast({
-                     title: "CAPTCHA Verification Failed",
-                     description: result.error,
-                     variant: "destructive",
-                 });
-                 // Reset CAPTCHA on failure as well
-                 recaptchaRef.current?.reset();
-                 setCaptchaToken(null);
-            } else {
-                 throw new Error(result.error || 'Failed to send message due to a server error.');
-            }
+            throw new Error(result.error || 'Failed to send message due to a server error.');
         }
 
      } catch (error) {
@@ -116,9 +66,6 @@ export default function ContactPage() {
          description: error instanceof Error ? error.message : "Could not send message. Please try again later or contact us directly via phone or email.",
          variant: "destructive",
        });
-        // Optionally reset CAPTCHA on general errors too
-        // recaptchaRef.current?.reset();
-        // setCaptchaToken(null);
      } finally {
         setIsSubmitting(false);
      }
@@ -126,12 +73,10 @@ export default function ContactPage() {
 
   // Placeholder for Google Maps API Key - should be in .env.local
   const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
-  // **Updated coordinates/address based on new info**
   // Example coordinates for Nungambakkam, Chennai (use actual if known)
   const officeLocation = { lat: 13.0604, lng: 80.2496 };
-  const officeAddress = "Bhaskara Apartments, No. 28, Pycroft’s Garden Road, Nungambakkam, Chennai";
+  const officeAddress = "Bhaskara Apartments, No. 28, Pycroft's Garden Road, Nungambakkam, Chennai";
   const mapEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(officeAddress)}`;
-
 
   return (
     <>
@@ -142,7 +87,6 @@ export default function ContactPage() {
        >
          <div className="absolute inset-0 bg-black/20 z-0"></div> {/* Subtle overlay */}
          <div className="container-max relative z-10 py-12 md:py-16">
-           {/* <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact Us' }]} /> */}
            <h1 className="text-4xl md:text-5xl font-heading font-bold mt-2">
              Contact Us
            </h1>
@@ -163,7 +107,7 @@ export default function ContactPage() {
                   <h5 className="font-semibold mb-1">Office Address</h5>
                   <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                     Bhaskara Apartments, No. 28,<br />
-                    Pycroft’s Garden Road,<br />
+                    Pycroft's Garden Road,<br />
                     Nungambakkam, Chennai, India
                   </a>
                 </div>
@@ -172,7 +116,6 @@ export default function ContactPage() {
                 <Phone className="h-6 w-6 mr-4 mt-1 flex-shrink-0 text-accent" />
                  <div>
                   <h5 className="font-semibold mb-1">Mobile</h5>
-                   {/* **Updated phone number** */}
                   <a href="tel:+919176624466" className="text-muted-foreground hover:text-primary transition-colors">+91 91766 24466</a>
                 </div>
               </li>
@@ -180,7 +123,6 @@ export default function ContactPage() {
                 <Mail className="h-6 w-6 mr-4 mt-1 flex-shrink-0 text-accent" />
                  <div>
                   <h5 className="font-semibold mb-1">Email</h5>
-                   {/* **Updated email address** */}
                   <a href="mailto:mail@grhari.com" className="text-muted-foreground hover:text-primary transition-colors">mail@grhari.com</a>
                 </div>
               </li>
@@ -220,7 +162,6 @@ export default function ContactPage() {
            </div>
         </div>
       </section>
-
 
        {/* Contact Form Section */}
       <section className="section-padding-sm bg-secondary">
@@ -322,51 +263,6 @@ export default function ContactPage() {
                       </FormItem>
                    )}
                 />
-
-                 {/* CAPTCHA Implementation */}
-                 <FormField
-                   control={form.control}
-                   name="captchaToken" // Ensure this name matches the schema
-                   render={({ field }) => ( // field is not directly used here, but needed for hook form structure
-                     <FormItem>
-                       <FormLabel>Security Check</FormLabel>
-                       <FormControl>
-                         {/*
-                           Replace with your actual CAPTCHA component.
-                           Example using a placeholder div structure.
-                           You'd typically install and use a library like 'react-google-recaptcha'.
-                           Make sure NEXT_PUBLIC_RECAPTCHA_SITE_KEY is set in your environment.
-                         */}
-                         <div>
-                           {/* Placeholder for reCAPTCHA component - Requires implementing react-google-recaptcha or similar */}
-                           {/* Example structure:
-                            <ReCAPTCHA
-                                ref={recaptchaRef}
-                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                                onChange={(token) => setCaptchaToken(token)}
-                                onErrored={() => {
-                                    setCaptchaToken(null);
-                                    form.setError("captchaToken", { type: "manual", message: "CAPTCHA error. Please try again." });
-                                }}
-                                onExpired={() => {
-                                    setCaptchaToken(null);
-                                    form.setValue('captchaToken', '', { shouldValidate: true });
-                                }}
-                            />
-                           */}
-                           {/* --- Simple Placeholder --- */}
-                            <div className="p-4 bg-muted rounded border border-input flex items-center space-x-2">
-                               <ShieldCheck className="w-5 h-5 text-muted-foreground"/>
-                               <span className="text-sm text-muted-foreground italic">CAPTCHA placeholder - Implement reCAPTCHA here</span>
-                            </div>
-                            {/* You might need a hidden input if your CAPTCHA library doesn't integrate with RHF directly */}
-                            <input type="hidden" {...form.register("captchaToken")} />
-                         </div>
-                       </FormControl>
-                       <FormMessage /> {/* This will display the validation error for captchaToken */}
-                     </FormItem>
-                   )}
-                 />
 
                <Button type="submit" className="w-full btn-cta" disabled={isSubmitting || !form.formState.isValid}>
                  {isSubmitting ? "Sending..." : "Send Message"}

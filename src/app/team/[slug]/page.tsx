@@ -116,7 +116,7 @@ export default async function TeamMemberProfilePage({ params }: { params: { slug
                <div className="prose prose-lg max-w-none text-foreground/90 space-y-4">
                  {/* Split bio into paragraphs */}
                  {member.bio.split('\n').filter(para => para.trim() !== '').map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
+                    <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }}/>
                  ))}
 
                  {/* Add more sections if there's more detailed info, e.g., Education, Publications */}
