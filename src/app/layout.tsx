@@ -65,6 +65,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(playfairDisplay.variable, openSans.variable)}>
+      <head>
+        <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+      </head>
       <body className="antialiased flex flex-col min-h-screen">
         <DisclaimerPopup />
         <Header />
